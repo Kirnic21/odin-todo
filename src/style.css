@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Font';
+    src: url('./Font.ttf');
+    font-weight: 600;
+    font-style: normal;
+  }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,body{
+  height:100%
+}
+#header{
+    font-family: 'font';
+    font-size: 6.0em;
+    display:flex;
+    background-color:#628395;
+    justify-content: center;
+}
+#sidebar {
+  width: 300px;
+  background: royalblue;
+  height: 100vh;
+}
+#container{
+  display:flex;
+  flex-direction: row;
+}
+.button{
+  font-family:'font';
+  font-size: 3em;
+  display:flex;
+  justify-content: center;
+
+  padding: 30px;
+}
+.button:hover{
+  background-color: yellow;
+}
