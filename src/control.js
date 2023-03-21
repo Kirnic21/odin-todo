@@ -1,8 +1,11 @@
-import './style.css';
 import {Todo} from "/src/model.js"
-import {mainPage} from "/src/dom.js"
 import {Project} from "/src/model.js"
 let todo1 = new Todo("DO To Do","I need to do The Todo Project","Till Tomorrow","High Priority","Avaible")
+console.log(todo1)
+let project1 = new Project("Todo","Not Todo")
+project1.todos.push(todo1)
+console.log(project1)
+
 function createTodo()
 {
         const title = document.createElement("div");
@@ -12,7 +15,7 @@ function createTodo()
         project.appendChild(title)
         const Description = document.createElement("div");
         Description.setAttribute("id","Description");
-        Description.textContent = todo1.description;
+        Description.textContent = todo1.Description;
         project.appendChild(Description)
         const dueDate = document.createElement("div");
         dueDate.setAttribute("id","dueDate");
@@ -20,7 +23,7 @@ function createTodo()
         project.appendChild(dueDate)
         const priority = document.createElement("div");
         priority.setAttribute("id","priority");
-        priority.textContent = todo1.priority;
+        priority.textContent = priority.title;
         project.appendChild(priority)
 }
 const createTodoButton = document.querySelector("#createTodo")

@@ -13,6 +13,7 @@
 }
 html,body{
   height:100%
+
 }
 #header{
     font-family: 'font';
@@ -22,9 +23,9 @@ html,body{
     justify-content: center;
 }
 #sidebar {
-  width: 300px;
+  width: 10%;
   background: royalblue;
-  height: 100vh;
+  height: 100%;
 }
 #container{
   display:flex;
@@ -40,4 +41,38 @@ html,body{
 }
 .button:hover{
   background-color: yellow;
+}
+.project{
+  background-color:blue;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 32px;
+  display: flex;
+  height: 25%;
+  gap:90px;
+  flex-wrap: wrap;
+}
+.todo{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  height: 12%;
+  border-radius: 10px;
+  gap:20px;
+  padding: 16px;
+  margin: 16px;
+  width: 300px;
+}
+.high{
+  background-color: red;
+}
+.low{
+  background-color: green;
+}
+.mid{
+  background-color: yellow;
+}
+#project-name{
+  background-color: gray;
+  height: 20px;
 }

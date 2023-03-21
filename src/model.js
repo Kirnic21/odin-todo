@@ -15,6 +15,7 @@ class Todo {
     this._title = title;
   }
 
+
   get description() {
     return this._description;
   }
@@ -70,16 +71,9 @@ class Project {
     this.todos.push(todo);
 
   }
-  removeTodo(index){
-   delete this.todos[index]
-  }
   
 }
 
-let todo2 = new Todo("AAA", "Poop ", "2", "High");
-
-let project1 = new Project("POO","LOLOLOLOLOL");
-project1.addTodo(todo2);
 
 
 
