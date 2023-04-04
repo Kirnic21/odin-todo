@@ -1,4 +1,8 @@
 export {mainPage}
+import {Todo} from "/src/model.js"
+import {Project} from "/src/model.js"
+let todo1 = new Todo("DO To Do","I need to do The Todo Project","Till Tomorrow","High Priority","Avaible")
+let Project1 = new Project("Do Todo","Doing Todo")
 function mainPage(){
 //content
 const content = document.querySelector("#content")
@@ -18,22 +22,10 @@ container.appendChild(sidebar);
 //ul and li
 const ul = document.createElement("ul");
 sidebar.appendChild(ul)
-const li1 = document.createElement("li");
-li1.textContent = "Home"
-li1.classList.add("button")
-ul.appendChild(li1)
-const li2 = document.createElement("li");
-li2.textContent = "Today"
-li2.classList.add("button")
-ul.appendChild(li2)
-const li3 = document.createElement("li");
-li3.textContent = "This Week"
-li3.classList.add("button")
-ul.appendChild(li3)
-const li4 = document.createElement("li");
-li4.textContent = "Projects"
-li4.classList.add("button")
-ul.appendChild(li4)
+const newProject = document.createElement("li");
+newProject.textContent = "New Project"
+newProject.setAttribute("id","newProject")
+newProject.classList.add("button")
+ul.appendChild(newProject)
+//Projects
 }
-
-

@@ -14,8 +14,6 @@ class Todo {
   set title(title) {
     this._title = title;
   }
-
-
   get description() {
     return this._description;
   }
@@ -47,9 +45,10 @@ class Todo {
 }
 
 class Project {
-  constructor(title, description) {
+  constructor(title, description,dueDate) {
     this.title = title;
     this.description = description;
+    this.dueDate = dueDate
     this.todos = [];
   }
 
@@ -67,6 +66,12 @@ class Project {
     this._description = description;
   }
 
+  get dueDate() {
+    return this._dueDate;
+  }
+  set dueDate(dueDate) {
+    this._dueDate = dueDate;
+  }
   addTodo(todo) {
     this.todos.push(todo);
 
