@@ -1,11 +1,10 @@
 export{myProjectManager}
-
-const myProjectManager = ((array)=>
+import { Project } from "./model";
+const placeholderProject = new Project("Estude seu puto")
+const myProjectManager = ((projectArray)=>
 {
     {
-        array = [1,2,3,]
+        projectArray = [placeholderProject]
     }
-    return {array};
+    return {projectArray};
 })();
-
-console.log(myProjectManager.array)

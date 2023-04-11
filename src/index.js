@@ -5,4 +5,3 @@ import {Project} from "/src/model.js"
 import { createProjectDom } from './dom';
 mainPage()
 createProjectDom()
-const container = document.querySelector("#container")

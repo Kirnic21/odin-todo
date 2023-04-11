@@ -3,7 +3,8 @@ import {Todo} from "/src/model.js"
 import {Project} from "/src/model.js"
 import { myProjectManager } from "./projectManager"
 export {createProjectDom}
-
+import { createProject } from "./control"
+import { deleteTodo } from "./todos"
 function mainPage(){
 //content
 const content = document.querySelector("#content")
@@ -57,6 +58,7 @@ function createProjectDom()
         createProject.setAttribute("id","createProject")
         createProject.textContent = "Create Project"
         ul1.appendChild(createProject)
+        i++
         createProject.addEventListener("click",function createProjectListener()
         {
                 //remove the input
@@ -67,10 +69,13 @@ function createProjectDom()
                 else{
                 let newProject = new Project(titleinput.value)
                 const project_div = document.createElement("div")
+                //create project div
                 project_div.classList.add("project")
                 project_div.textContent = newProject.title
                 projects.appendChild(project_div)
-                myProjectManager.array = 
+                //push thing to array
+                myProjectManager.projectArray.push(newProject)
+                console.log(myProjectManager)
                 titleinput.remove()
                 createProject.remove()
                 i--
@@ -78,6 +83,9 @@ function createProjectDom()
                 }
         })
 }})
+let aaproject = new  Project("now")
+console.log(aaproject)
+
 function removeAllChildrenNodes(parent){
         while (parent.firstChild) {
                 parent.removeChild(parent.firstChild);
@@ -90,7 +98,4 @@ function replaceProjectsWithTodo()
        const projectsContainer = document.querySelector("#projects")
        removeAllChildrenNodes(projectsContainer)
 }      
-function createTodo() {
-        
-}
 
