@@ -5,4 +5,4 @@ import {Project} from "/src/model.js"
 import { createProjectDom } from './dom';
 import { myProjectManager } from './projectManager';
 mainPage()
-console.log(myProjectManager.projectArray)
+

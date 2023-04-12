@@ -4,7 +4,6 @@ import {Project} from "/src/model.js"
 import { myProjectManager } from "./projectManager"
 import { createProject } from "./control"
 import { deleteTodo } from "./todos"
-
 function mainPage(){
 //content
 const content = document.querySelector("#content")
@@ -26,32 +25,23 @@ container.appendChild(sidebar);
 const ul = document.createElement("ul");
 ul.setAttribute("id","ul1")
 sidebar.appendChild(ul)
-//newProject
+//newProject BUTTON DIV 
 const newProject = document.createElement("li");
 newProject.textContent = "New Project"
 newProject.setAttribute("id","newProject")
 newProject.classList.add("button")
 ul.appendChild(newProject)
+//projects div
 const projects = document.createElement("div")
 projects.setAttribute("id","projects")
 container.appendChild(projects)
+//kowakute
 const projectsHeader = document.createElement("div")
 projectsHeader.setAttribute("id","projectsHeader")
 projectsHeader.textContent = "Projects: "
 projects.appendChild(projectsHeader)
 }
 mainPage()
-function createProjectDiv()
-{
-        //create inputTitle
-        const inputTitle = document.querySelector("#titleInput").value;
-        const projects = document.querySelector("#projects")
-        createProject(inputTitle)
-        const projectDiv = document.createElement("div");
-        projectDiv.textContent = inputTitle
-        projectDiv.classList.add("project")
-        projects.appendChild(projectDiv)
-}
 function createProjectDomButton(){
 //find create button page
 const createProjectButton = document.querySelector("#newProject")
@@ -71,6 +61,18 @@ createProjectButton.addEventListener("click",function createProjectButton()
         submitButton.setAttribute("id","createButton")
         submitButton.textContent = "Create project";
         ul1.appendChild(submitButton)
-        submitButton.addEventListener("click",createProjectDiv())
+        submitButton.addEventListener("click", createProjectDiv)
 })}
-createProjectDomButton();
+createProjectDomButton()
+function createProjectDiv()
+{
+const inputTitle = document.querySelector("#titleInput").value
+console.log(inputTitle)
+const projects = document.querySelector("#projects")
+createProject(inputTitle);
+const projectDiv = document.createElement("div");
+projectDiv.textContent = inputTitle
+projectDiv.classList.add("project")
+projects.appendChild(projectDiv)
+}
+
