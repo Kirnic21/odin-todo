@@ -2,9 +2,9 @@ export {mainPage}
 import {Todo} from "/src/model.js"
 import {Project} from "/src/model.js"
 import { myProjectManager } from "./projectManager"
-export {createProjectDom}
 import { createProject } from "./control"
 import { deleteTodo } from "./todos"
+
 function mainPage(){
 //content
 const content = document.querySelector("#content")
@@ -26,6 +26,7 @@ container.appendChild(sidebar);
 const ul = document.createElement("ul");
 ul.setAttribute("id","ul1")
 sidebar.appendChild(ul)
+//newProject
 const newProject = document.createElement("li");
 newProject.textContent = "New Project"
 newProject.setAttribute("id","newProject")
@@ -39,63 +40,37 @@ projectsHeader.setAttribute("id","projectsHeader")
 projectsHeader.textContent = "Projects: "
 projects.appendChild(projectsHeader)
 }
-function createProjectDom()
+mainPage()
+function createProjectDiv()
 {
-        //clicking button creates a project
-        const newProject = document.querySelector("#newProject")
-        let i = 0
-        newProject.addEventListener("click",function createInput(){
-        if(i==0){
-        const input1 = document.createElement('div')
-        const titleinput = document.createElement('input')
-        titleinput.setAttribute("placeholder","title")
-        titleinput.setAttribute("type","text")
-        titleinput.setAttribute("id","titleInput")
-        input1.appendChild(titleinput)
-        const ul1 = document.querySelector('#ul1')
-        ul1.appendChild(input1)
-        const createProject = document.createElement("button")
-        createProject.setAttribute("id","createProject")
-        createProject.textContent = "Create Project"
-        ul1.appendChild(createProject)
-        i++
-        createProject.addEventListener("click",function createProjectListener()
-        {
-                //remove the input
-                if(titleinput.value === "")
-                {
-                        return false
-                }
-                else{
-                let newProject = new Project(titleinput.value)
-                const project_div = document.createElement("div")
-                //create project div
-                project_div.classList.add("project")
-                project_div.textContent = newProject.title
-                projects.appendChild(project_div)
-                //push thing to array
-                myProjectManager.projectArray.push(newProject)
-                console.log(myProjectManager)
-                titleinput.remove()
-                createProject.remove()
-                i--
-
-                }
-        })
-}})
-let aaproject = new  Project("now")
-console.log(aaproject)
-
-function removeAllChildrenNodes(parent){
-        while (parent.firstChild) {
-                parent.removeChild(parent.firstChild);
-            }
-        }
+        //create inputTitle
+        const inputTitle = document.querySelector("#titleInput").value;
+        const projects = document.querySelector("#projects")
+        createProject(inputTitle)
+        const projectDiv = document.createElement("div");
+        projectDiv.textContent = inputTitle
+        projectDiv.classList.add("project")
+        projects.appendChild(projectDiv)
 }
-//substitute projects and todos
-function replaceProjectsWithTodo()
-{
-       const projectsContainer = document.querySelector("#projects")
-       removeAllChildrenNodes(projectsContainer)
-}      
+function createProjectDomButton(){
+//find create button page
+const createProjectButton = document.querySelector("#newProject")
+console.log(createProjectButton)
+//creating Project with input
+const ul1 = document.querySelector("#ul1")
 
+createProjectButton.addEventListener("click",function createProjectButton()
+{
+        //create input
+        const inputTitle = document.createElement("input")
+        inputTitle.setAttribute("id","titleInput")
+        inputTitle.setAttribute("placeholder","title")
+        ul1.appendChild(inputTitle)
+        //button to create project
+        const submitButton = document.createElement("button")
+        submitButton.setAttribute("id","createButton")
+        submitButton.textContent = "Create project";
+        ul1.appendChild(submitButton)
+        submitButton.addEventListener("click",createProjectDiv())
+})}
+createProjectDomButton();

@@ -8,3 +8,4 @@ const myProjectManager = ((projectArray)=>
     }
     return {projectArray};
 })();
+console.log(myProjectManager.projectArray)
