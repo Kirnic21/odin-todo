@@ -3,11 +3,10 @@ import { myProjectManager } from "./projectManager"
 export{deleteTodo}
 export{renameTodo}
 export{redescribeTodo}
-import { Project } from "./model"
-import { createProject } from "./control"
-import { format } from "date-fns"
+export{createTodo}
 
-createProject("lolol")
+
+
 
 function createTodo(title, description, dueDate, priority,index){
     const newTodo = new Todo(title,description,dueDate,priority)
@@ -15,7 +14,7 @@ function createTodo(title, description, dueDate, priority,index){
     array.push(newTodo) 
     return newTodo
 }
-
+ 
 function deleteTodo(index,todo)
 {
     {   
@@ -41,6 +40,4 @@ function redescribeTodo(todo,newDesc)
      todo.description = newDesc
     return todo.description
 }
-const dueDate = format(new Date(2014, 2, 11), 'MM/dd/yyyy')
-let todo = createTodo("i love cats","cats i love",dueDate,"meow",0)
-let todo2 = createTodo("dogs","dogs is cool",dueDate,"dog",0)
+
