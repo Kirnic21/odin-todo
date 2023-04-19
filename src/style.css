@@ -15,6 +15,7 @@ html,body{
   height:100%
 
 }
+
 #header{
     font-family: 'font';
     font-size: 3em;
@@ -133,4 +134,19 @@ justify-content: center;
   gap:80px;
   justify-content: flex-end;
   width: 100%;
+}
+#textTitleInput{
+  display: flex;
+}
+#dueDateInput{
+  display:flex;
+}
+#priorityInput{
+  display: flex;
+}
+#returnButton{
+  width: 100%;
+display: flex;
+background-color: red;
+justify-content: center;
 }

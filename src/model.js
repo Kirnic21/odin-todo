@@ -1,8 +1,7 @@
 export {Todo,Project}
 class Todo {
-  constructor(title, description, dueDate, priority,status) {
+  constructor(title, dueDate, priority,status) {
     this.title = title;
-    this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.status = status
@@ -13,12 +12,6 @@ class Todo {
   }
   set title(title) {
     this._title = title;
-  }
-  get description() {
-    return this._description;
-  }
-  set description(description) {
-    this._description = description;
   }
 
   get dueDate() {

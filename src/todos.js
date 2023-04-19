@@ -8,8 +8,8 @@ export{createTodo}
 
 
 
-function createTodo(title, description, dueDate, priority,index){
-    const newTodo = new Todo(title,description,dueDate,priority)
+function createTodo(title, dueDate, priority,index){
+    const newTodo = new Todo(title,dueDate,priority)
     let array = myProjectManager.projectArray[index].todos
     array.push(newTodo) 
     return newTodo
