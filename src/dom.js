@@ -1,11 +1,11 @@
 export {mainPage}
 import { myProjectManager } from "./projectManager"
-import { createProject } from "./control"
+import { createProject } from "./projects"
 import { createTodo } from "./todos"
 export{removeAllChildNodes}
 export{createProjectDomButton}
 export {displayAllProjects}
-import { removeProject } from "./control"
+import { removeProject } from "./projects"
 import { selectTodo } from "./todosDom"
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -90,9 +90,9 @@ function displayAllProjects()
                 projectDiv.dataset.id = myProjectManager.projectArray[i].index
                 projects.appendChild(projectDiv)
                 const removeButton = document.createElement("button")
-                removeButton.addEventListener("click",function removeProject(){
+                removeButton.addEventListener("click",function removeProjectDiv(){
                         projectDiv.remove()
-
+                        removeProject()
                 })
         }
 }

@@ -1,6 +1,6 @@
 export {selectTodo}
 import { myProjectManager } from "./projectManager"
-import { filterProjects } from "./control"
+import { filterProjects } from "./projects"
 import { createTodo } from "./todos"
 import { mainPage } from "./dom"
 import {removeAllChildNodes} from "./dom"   
