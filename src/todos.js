@@ -36,13 +36,13 @@ function renameTodo(todo,newTitle)
     todo.title = newTitle
     return todo.title
 }
-function changeDate(todo,newdate)
+function changeDate(todo,newDate)
 {
-    todo.dueDate = newdate
-    return todo.newdate
+    todo.dueDate = newDate
+    return todo.dueDate
 }
 function changePriority(todo,newPriority)
 {
-    todo.newPriority = newPriority
-    return todo.newPriority
+    todo.priority = newPriority
+    return todo.priority
 }
