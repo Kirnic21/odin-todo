@@ -7,6 +7,9 @@ import {removeAllChildNodes} from "./dom"
 import {createProjectDomButton} from "./dom"
 import {displayAllProjects} from "./dom"
 import { deleteTodo } from "./todos"
+import { renameTodo } from "./todos"
+import { changePriority } from "./todos"
+import { changeDate } from "./todos"
 function createTodoDiv(todo,index,projectIndex){
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo")
@@ -33,6 +36,46 @@ function createTodoDiv(todo,index,projectIndex){
         todoDiv.remove()
     })
     removeTodoButton.textContent = "remove Todo"
+    const editButton = document.createElement("button")
+    editButton.textContent = "edit todo"
+    endGroup.appendChild(editButton)
+    editButton.addEventListener("click",function editTodoListener(){
+                const todoInArray = myProjectManager.projectArray[projectIndex].todos[index]
+                //rename
+                const ulToDo = document.querySelector("#ul1")
+                const textTitle = document.createElement("li")
+                const textTitleInput = document.createElement("input")
+                textTitleInput.setAttribute("id","textTitleInput")
+                textTitle.appendChild(textTitleInput)
+                renameTodo(todoInArray,textTitleInput.value)
+                ulToDo.appendChild(textTitle)
+                //date
+                const dueDate = document.createElement("li")
+                const dueDateInput = document.createElement("input")
+                dueDateInput.setAttribute("type","date")
+                dueDateInput.setAttribute("id","dueDateInput")
+                dueDate.appendChild(dueDateInput)
+                changeDate(todoInArray,dueDateInput.value)
+                ulToDo.appendChild(dueDate)
+                const  priority = document.createElement("li")
+                const   priorityInput = document.createElement("input")
+                priorityInput.setAttribute("id","priorityInput")
+                priority.appendChild(priorityInput)
+                ulToDo.appendChild(priority)
+                changePriority(todoInArray,priorityInput.value)
+                const submitButton = document.createElement("button")
+                submitButton.textContent = "Create todo"
+                ulToDo.appendChild(submitButton)
+                submitButton.addEventListener("click",function changeTodos()
+                {       
+                        //removealltodos
+                        todoTitle.textContent = textTitleInput.value
+                        todoDueDate.textContent = dueDateInput.value
+                        todoPriority.textContent = priority.value
+
+                })
+        
+    })
     return todoDiv
 }
 mainPage()
@@ -41,6 +84,7 @@ function selectTodo()
  const project = document.querySelectorAll(".project") 
  for(let i = 0;i<project.length;i++)
  {
+        
  project[i].addEventListener("click",function filterAll(e){
         const ul1 = document.querySelector("#ul1")
         const projectIndex = e.target.dataset.id;

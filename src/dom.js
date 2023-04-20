@@ -1,6 +1,6 @@
 export {mainPage}
 import { myProjectManager } from "./projectManager"
-import { createProject } from "./projects"
+import { createProject, renameProject } from "./projects"
 import { createTodo } from "./todos"
 export{removeAllChildNodes}
 export{createProjectDomButton}
@@ -54,7 +54,6 @@ mainPage()
 function createProjectDomButton(){
 //find create button page
 const createProjectButton = document.querySelector("#newProject")
-//creating Project with input
 const ul1 = document.querySelector("#ul1")
 
 createProjectButton.addEventListener("click",function createProjectButton(e)
@@ -77,8 +76,8 @@ createProjectButton.addEventListener("click",function createProjectButton(e)
 })
 }
 createProjectDomButton()
-//get project lenght
-//Create projects
+
+
 function displayAllProjects()
 {
         const projects = document.querySelector("#projects")
@@ -87,16 +86,74 @@ function displayAllProjects()
                 const projectDiv = document.createElement("div");
                 projectDiv.classList.add("project")
                 projectDiv.textContent = myProjectManager.projectArray[i].title 
-                projectDiv.dataset.id = myProjectManager.projectArray[i].index
+                projectDiv.dataset.id = i
                 projects.appendChild(projectDiv)
                 const removeButton = document.createElement("button")
-                removeButton.addEventListener("click",function removeProjectDiv(){
-                        projectDiv.remove()
-                        removeProject()
-                })
+                removeButton.classList.add("removeButton")
+                removeButton.dataset.id = i 
+                projects.appendChild(removeButton)
+                removeButton.textContent = "remove"
+                const editButton = document.createElement("button")
+                editButton.classList.add("editButton")
+                editButton.textContent = "edit"
+                editButton.dataset.id = i 
+                projects.appendChild(editButton)
+                
+        }
+        const removeButton = document.querySelectorAll(".removeButton")
+        for(let i = 0;i<removeButton.length;i++)
+        {
+                removeButton[i].addEventListener("click",function removeTheDom(e){
+                        let index = e.target.dataset.id;
+                        removeProjectDom(index)
+                        selectTodo()
+                })    
+        }
+        const editButton = document.querySelectorAll(".editButton")
+        for(let i = 0;i<editButton.length;i++)
+        {
+                editButton[i].addEventListener("click",function renameTheDom(e){
+                        let index = e.target.dataset.id;
+                        editProjectDom(index)
+                        selectTodo()
+                })    
         }
 }
 displayAllProjects()
+function removeProjectDom(projectIndex)
+{
+        removeProject(myProjectManager.projectArray[projectIndex],myProjectManager.projectArray)
+        const projects = document.querySelector("#projects")
+        while(projects.childNodes.length>1)
+        {
+                projects.removeChild(projects.lastChild)
+        }
+        displayAllProjects()
+}
+function editProjectDom(projectIndex)
+{
+        const thisProject = myProjectManager.projectArray[projectIndex]
+        const ul1 = document.querySelector("#ul1")
+        const inputTitle = document.createElement("input")
+        inputTitle.setAttribute("id","titleInput")
+        inputTitle.setAttribute("placeholder","title")
+        inputTitle.value = thisProject.title
+        ul1.appendChild(inputTitle)
+        const submitButton = document.createElement("button")
+        submitButton.setAttribute("id","createButton")
+        submitButton.textContent = "renameProject";
+        ul1.appendChild(submitButton)
+        submitButton.addEventListener("click",function editProjectDomListener(){
+                
+                renameProject(myProjectManager.projectArray[projectIndex],inputTitle.value)
+                const projects = document.querySelector("#projects")
+                while(projects.childNodes.length>1)
+                {
+                        projects.removeChild(projects.lastChild)
+                }
+                displayAllProjects()
+        })
+}
 function createProjectDiv()
 {
 const inputTitle = document.querySelector("#titleInput")
@@ -116,6 +173,7 @@ projectDiv.classList.add("project");
 projects.appendChild(projectDiv);
 inputTitle.remove();
 submitButton.remove();
+selectTodo()
 }
 }
 const todo1 =createTodo("sooo","loveTheSubhuman","Self",0)

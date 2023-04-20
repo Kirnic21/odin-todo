@@ -38,9 +38,8 @@ class Todo {
 }
 
 class Project {
-  constructor(title,index) {
+  constructor(title) {
     this.title = title;
-    this.index = index
     this.todos = [];
   }
   get index() {

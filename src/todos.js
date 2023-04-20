@@ -2,9 +2,10 @@ import { Todo } from "./model"
 import { myProjectManager } from "./projectManager"
 export{deleteTodo}
 export{renameTodo}
-export{redescribeTodo}
-export{createTodo}
 
+export{createTodo}
+export{changeDate}
+export{changePriority}
 
 
 
@@ -35,9 +36,13 @@ function renameTodo(todo,newTitle)
     todo.title = newTitle
     return todo.title
 }
-function redescribeTodo(todo,newDesc)
+function changeDate(todo,newdate)
 {
-     todo.description = newDesc
-    return todo.description
+    todo.dueDate = newdate
+    return todo.newdate
 }
-
+function changePriority(todo,newPriority)
+{
+    todo.newPriority = newPriority
+    return todo.newPriority
+}

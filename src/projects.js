@@ -20,7 +20,6 @@ function removeProject(project,arr)
     
             arr.splice(i, 1); 
         }
-    
     }
     return arr
  }
