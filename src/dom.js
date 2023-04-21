@@ -176,7 +176,6 @@ submitButton.remove();
 selectTodo()
 }
 }
-const todo1 =createTodo("sooo","loveTheSubhuman","Self",0)
-const todo2 = createTodo("meow","meow","meow",0)
+
 //createTodoDiv
 selectTodo()

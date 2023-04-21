@@ -6,16 +6,18 @@ export{renameTodo}
 export{createTodo}
 export{changeDate}
 export{changePriority}
-
-
-
+export{doneTodo}
 function createTodo(title, dueDate, priority,index){
     const newTodo = new Todo(title,dueDate,priority)
     let array = myProjectManager.projectArray[index].todos
     array.push(newTodo) 
     return newTodo
 }
- 
+function doneTodo(todo,status){
+    todo.status = status
+    return todo.status
+
+}
 function deleteTodo(index,todo)
 {
     {   

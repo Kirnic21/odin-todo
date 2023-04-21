@@ -10,7 +10,11 @@ import { deleteTodo } from "./todos"
 import { renameTodo } from "./todos"
 import { changePriority } from "./todos"
 import { changeDate } from "./todos"
+import { format } from "date-fns/esm"
+import {parseISO} from "date-fns"
+import { doneTodo } from "./todos"
 mainPage()
+
 function selectTodo()
 {      
  const project = document.querySelectorAll(".project") 
@@ -83,7 +87,10 @@ function selectTodo()
                 todoDiv.appendChild(endGroup)
                 //due date
                 const todoDueDate = document.createElement("div")
-                endGroup.textContent = todo.dueDate
+
+                const date = format(new Date(todo.dueDate),'MM/dd/yyyy')
+                
+                endGroup.textContent = date
                 todoDiv.appendChild(todoDueDate)
                 //priority
                 const todoPriority = document.createElement("div");
@@ -95,21 +102,65 @@ function selectTodo()
                 const removeTodoButton = document.createElement("button")
                 removeTodoButton.setAttribute("id","removeTodo")
                 endGroup.appendChild(removeTodoButton)
+                //change color with priority
+                if(todo.priority === "HIGH")
+                {
+                        todoDiv.classList.add("high")
+
+                }
+                else if(todo.priority === "MEDIUM")
+                {
+                        todoDiv.classList.add("medium")
+                }
+                else if(todo.priority === "LOW")
+                {
+                        todoDiv.classList.add("low")
+                }
                 removeTodoButton.addEventListener("click",function removeTodoButton()
                 {
                     deleteTodo(projectIndex,todo)
                     todoDiv.remove()
                 })
+                const done = document.createElement("button")
+                done.textContent = myProjectManager.projectArray[projectIndex].todos[index].status
+                
+                todoDiv.appendChild(done)
+                done.addEventListener("click",function isItDone()
+                {
+                        if(myProjectManager.projectArray[projectIndex].todos[index].status === "not done")
+                        {
+                                doneTodo(myProjectManager.projectArray[projectIndex].todos[index],"done")
+                        }
+                        else if(myProjectManager.projectArray[projectIndex].todos[index].status === "done")
+                        {
+                                doneTodo(myProjectManager.projectArray[projectIndex].todos[index],"not done")
+                        }
+                        while(todos.childNodes.length>2)
+                                    {
+                                            todos.removeChild(todos.lastChild)
+                                    }
+                                for(let i = 0;i<todoPlace.length;i++)
+                                    {
+                                        const todo = todoPlace[i]
+                                        const todoDiv = createTodoDiv(todo,i,projectIndex)
+                                        todos.appendChild(todoDiv)
+                                    }
+                                }
+
+                )
                 removeTodoButton.textContent = "remove Todo"
                 const editButton = document.createElement("button")
                 editButton.textContent = "edit todo"
                 endGroup.appendChild(editButton)
                 editButton.addEventListener("click",function editTodoListener(){
+                            if(createTodoButton.classList.contains("clicked") === false){
                             const todoInArray = myProjectManager.projectArray[projectIndex].todos[index]
                             //rename
+                            createTodoButton.classList.add("clicked")
                             const ulToDo = document.querySelector("#ul1")
                             const textTitle = document.createElement("li")
                             const textTitleInput = document.createElement("input")
+                            textTitleInput.value = todoInArray.title
                             textTitleInput.setAttribute("id","textTitleInput")
                             textTitle.appendChild(textTitleInput)
                             ulToDo.appendChild(textTitle)
@@ -118,25 +169,62 @@ function selectTodo()
                             const dueDateInput = document.createElement("input")
                             dueDateInput.setAttribute("type","date")
                             dueDateInput.setAttribute("id","dueDateInput")
+                            dueDateInput.setAttribute("required")
                             dueDate.appendChild(dueDateInput)
                             ulToDo.appendChild(dueDate)
                             //priority
                             const  priority = document.createElement("li")
-                            const   priorityInput = document.createElement("input")
-                            priorityInput.setAttribute("id","priorityInput")
-                            priority.appendChild(priorityInput)
-                            ulToDo.appendChild(priority)
+                                ulToDo.appendChild(priority)
+                                const   priorityInput1 = document.createElement("input")
+                                priorityInput1.classList.add("priorityInput")
+                                priorityInput1.setAttribute("type","radio");
+                                priorityInput1.setAttribute("name","priority");
+                                priorityInput1.setAttribute("value","HIGH");
+                                priorityInput1.setAttribute("id","priorityInput1")
+                                const priorityInput1Label = document.createElement("label")
+                                priorityInput1Label.textContent = "High"
+                                priorityInput1Label.setAttribute("for","priorityInput1")
+                                priority.appendChild(priorityInput1)
+                                priority.appendChild(priorityInput1Label)
+                                
+                                const   priorityInput2 = document.createElement("input")
+                                priorityInput2.setAttribute("id","priorityInput")
+                                priorityInput2.setAttribute("type","radio");
+                                priorityInput2.setAttribute("name","priority");
+                                priorityInput2.setAttribute("value","MEDIUM");
+                                priorityInput2.setAttribute("id","priorityInput2")
+                                priorityInput2.textContent = priorityInput2.value
+                                priorityInput2.classList.add("priorityInput")
+                                const priorityInput2Label = document.createElement("label")
+                                priorityInput2Label.setAttribute("for","priorityInput2")
+                                priorityInput2Label.textContent = "Medium"
+                                priority.appendChild(priorityInput2)
+                                priority.appendChild(priorityInput2Label)
+                                const   priorityInput3 = document.createElement("input")
+                                priorityInput3.setAttribute("id","priorityInput")
+                                priorityInput3.setAttribute("type","radio");
+                                priorityInput3.setAttribute("name","priority");
+                                priorityInput3.setAttribute("value","LOW");
+                                priorityInput3.checked =true
+                                priorityInput3.textContent = priorityInput3.value
+                                priorityInput3.setAttribute("id","priorityInput3")
+                                priorityInput3.classList.add("priorityInput")
+                                const priorityInput3Label = document.createElement("label")
+                                priorityInput3Label.setAttribute("for","priorityInput3")
+                                priorityInput3Label.textContent = "Low"
+                                priority.appendChild(priorityInput3)
+                                priority.appendChild(priorityInput3Label)
                             const submitButton = document.createElement("button")
                             submitButton.textContent = "edit todo"
                             ulToDo.appendChild(submitButton)
                             submitButton.addEventListener("click",function changeTodos()
                             {       
+                                const priorityValue=document.querySelector('input[name="priority"]:checked').value;
                                     //removealltodos
- 
                                     renameTodo(todoInArray,textTitleInput.value)
                                     changeDate(todoInArray,dueDateInput.value)
-                                changePriority(todoInArray,priorityInput.value)
-
+                                changePriority(todoInArray,priorityValue)
+                                createTodoButton.classList.remove("clicked")
                                     while(todos.childNodes.length>2)
                                     {
                                             todos.removeChild(todos.lastChild)
@@ -153,6 +241,7 @@ function selectTodo()
                                             ul1.removeChild(ul1.lastChild)
                                     }
                             })
+                        }
                     
                 })
                 return todoDiv
@@ -179,18 +268,69 @@ function selectTodo()
                 dueDate.appendChild(dueDateInput)
                 ulToDo.appendChild(dueDate)
                 const  priority = document.createElement("li")
-                const   priorityInput = document.createElement("input")
-                priorityInput.setAttribute("id","priorityInput")
-                priority.appendChild(priorityInput)
                 ulToDo.appendChild(priority)
+                const   priorityInput1 = document.createElement("input")
+                priorityInput1.classList.add("priorityInput")
+                priorityInput1.setAttribute("type","radio");
+                priorityInput1.setAttribute("name","priority");
+                priorityInput1.setAttribute("value","HIGH");
+                priorityInput1.setAttribute("id","priorityInput1")
+                const priorityInput1Label = document.createElement("label")
+                priorityInput1Label.textContent = "High"
+                priorityInput1Label.setAttribute("for","priorityInput1")
+                priority.appendChild(priorityInput1)
+                priority.appendChild(priorityInput1Label)
+                
+                const   priorityInput2 = document.createElement("input")
+                priorityInput2.setAttribute("id","priorityInput")
+                priorityInput2.setAttribute("type","radio");
+                priorityInput2.setAttribute("name","priority");
+                priorityInput2.setAttribute("value","MEDIUM");
+                priorityInput2.setAttribute("id","priorityInput2")
+                priorityInput2.textContent = priorityInput2.value
+                priorityInput2.classList.add("priorityInput")
+                const priorityInput2Label = document.createElement("label")
+                priorityInput2Label.setAttribute("for","priorityInput2")
+                priorityInput2Label.textContent = "Medium"
+                priority.appendChild(priorityInput2)
+                priority.appendChild(priorityInput2Label)
+                const   priorityInput3 = document.createElement("input")
+                priorityInput3.setAttribute("id","priorityInput")
+                priorityInput3.setAttribute("type","radio");
+                priorityInput3.setAttribute("name","priority");
+                priorityInput3.setAttribute("value","LOW");
+                priorityInput3.checked =true
+                priorityInput3.textContent = priorityInput3.value
+                priorityInput3.setAttribute("id","priorityInput3")
+                priorityInput3.classList.add("priorityInput")
+                const priorityInput3Label = document.createElement("label")
+                priorityInput3Label.setAttribute("for","priorityInput3")
+                priorityInput3Label.textContent = "Low"
+                priority.appendChild(priorityInput3)
+                priority.appendChild(priorityInput3Label)
                 const submitButton = document.createElement("button")
                 submitButton.textContent = "Create todo"
                 ulToDo.appendChild(submitButton)
+                //check if dueDateInput is half filled
+                const isObjectEmpty = (objectName) => {
+                        return Object.keys(objectName).length === 0
+                      }
+                      
+                
                 submitButton.addEventListener("click",function addTodoToTheProjects() {
-                if(textTitleInput.value !== "" && (dueDateInput.value !== " " || dueDateInput.checkValidity() === false)   && priorityInput.value !== "")
+                if(textTitleInput.value !== "" && (dueDateInput.value !== "" || isObjectEmpty(dueDateInput.value) === false))
                 {
+                        const date = format(new Date(dueDateInput.value),'MM/dd/yyyy' )
+                        const todayTest = new Date()
+
+                        if(todayTest > parseISO(dueDateInput.value) === true)
+                        {
+                                alert("insert a valid date")
+                                return 0
+                        }
+                const priorityValue=document.querySelector('input[name="priority"]:checked').value;
                 createTodoButton.classList.remove("clicked")
-                createTodo(textTitleInput.value,dueDateInput.value,priorityInput.value,projectIndex)
+                createTodo(textTitleInput.value,date,priorityValue,projectIndex)
                 while(todos.childNodes.length>2)
                 {
                         todos.removeChild(todos.lastChild)
