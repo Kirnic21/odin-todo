@@ -169,7 +169,7 @@ function selectTodo()
                             const dueDateInput = document.createElement("input")
                             dueDateInput.setAttribute("type","date")
                             dueDateInput.setAttribute("id","dueDateInput")
-                            dueDateInput.setAttribute("required")
+
                             dueDate.appendChild(dueDateInput)
                             ulToDo.appendChild(dueDate)
                             //priority

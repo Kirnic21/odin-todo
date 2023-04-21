@@ -5,4 +5,5 @@ import {Project} from "/src/model.js"
 import { createProjectDom } from './dom';
 import { myProjectManager } from './projectManager';
 import { format } from 'date-fns/esm';
+import { setProjects } from './localStorage';
 mainPage()

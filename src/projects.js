@@ -4,11 +4,13 @@ export {createProject}
 export{removeProject}
 export{renameProject}
 export {filterProjects}
+import { setProjects } from "./localStorage"
 function createProject(name)
 {
     let newProject = new Project(name)
     myProjectManager.projectArray.push(newProject)
     newProject.index = myProjectManager.projectArray.indexOf(newProject)
+    setProjects()
     return newProject
 }
 
@@ -21,7 +23,9 @@ function removeProject(project,arr)
             arr.splice(i, 1); 
         }
     }
+    setProjects()
     return arr
+
  }
 function renameProject(project,newTitle){
     project.title = newTitle

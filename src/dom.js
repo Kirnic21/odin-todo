@@ -1,7 +1,7 @@
 export {mainPage}
 import { myProjectManager } from "./projectManager"
 import { createProject, renameProject } from "./projects"
-import { createTodo } from "./todos"
+import { setProjects } from "./localStorage"
 export{removeAllChildNodes}
 export{createProjectDomButton}
 export {displayAllProjects}
@@ -72,6 +72,7 @@ createProjectButton.addEventListener("click",function createProjectButton(e)
         submitButton.textContent = "Create project";
         ul1.appendChild(submitButton)
         submitButton.addEventListener("click", createProjectDiv)
+
         }
 })
 }
@@ -130,14 +131,17 @@ function removeProjectDom(projectIndex)
         }
         displayAllProjects()
 }
+removeProjectDom()
 function editProjectDom(projectIndex)
 {
         const thisProject = myProjectManager.projectArray[projectIndex]
         const ul1 = document.querySelector("#ul1")
         const inputTitle = document.createElement("input")
         inputTitle.setAttribute("id","titleInput")
+        console.log(thisProject.title)
         inputTitle.setAttribute("placeholder","title")
         inputTitle.value = thisProject.title
+        console.log(thisProject.title)
         ul1.appendChild(inputTitle)
         const submitButton = document.createElement("button")
         submitButton.setAttribute("id","createButton")
@@ -171,11 +175,12 @@ projectDiv.textContent = project.title;
 projectDiv.dataset.id = project.index;
 projectDiv.classList.add("project");
 projects.appendChild(projectDiv);
+removeProjectDom()
+editProjectDom(projectDiv.dataset.id)
 inputTitle.remove();
 submitButton.remove();
 selectTodo()
 }
 }
-
 //createTodoDiv
 selectTodo()

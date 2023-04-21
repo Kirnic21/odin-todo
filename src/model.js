@@ -1,6 +1,6 @@
 export {Todo,Project}
 class Todo {
-  constructor(title, dueDate, priority,status) {
+  constructor(title, dueDate, priority) {
     this.title = title;
     this.dueDate = dueDate;
     this.priority = priority;
