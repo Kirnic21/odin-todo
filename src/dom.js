@@ -7,6 +7,8 @@ export{createProjectDomButton}
 export {displayAllProjects}
 import { removeProject } from "./projects"
 import { selectTodo } from "./todosDom"
+export{removeProjectDom}
+export{createProjectDiv}
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -141,7 +143,7 @@ function editProjectDom(projectIndex)
         console.log(thisProject.title)
         inputTitle.setAttribute("placeholder","title")
         inputTitle.value = thisProject.title
-        console.log(thisProject.title)
+
         ul1.appendChild(inputTitle)
         const submitButton = document.createElement("button")
         submitButton.setAttribute("id","createButton")
@@ -156,6 +158,8 @@ function editProjectDom(projectIndex)
                         projects.removeChild(projects.lastChild)
                 }
                 displayAllProjects()
+                inputTitle.remove()
+                submitButton.remove()
         })
 }
 function createProjectDiv()
@@ -176,7 +180,6 @@ projectDiv.dataset.id = project.index;
 projectDiv.classList.add("project");
 projects.appendChild(projectDiv);
 removeProjectDom()
-editProjectDom(projectDiv.dataset.id)
 inputTitle.remove();
 submitButton.remove();
 selectTodo()

@@ -5,6 +5,8 @@ export{removeProject}
 export{renameProject}
 export {filterProjects}
 import { setProjects } from "./localStorage"
+import { getProjects } from "./localStorage"
+import { forEachKey } from "./localStorage"
 function createProject(name)
 {
     let newProject = new Project(name)
@@ -29,6 +31,8 @@ function removeProject(project,arr)
  }
 function renameProject(project,newTitle){
     project.title = newTitle
+    setProjects()
+    getProjects()
     return project.title
 }
 function filterProjects(project)
