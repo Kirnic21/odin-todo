@@ -1,3 +1,4 @@
+import { setProjects } from "./localStorage"
 import { Todo } from "./model"
 import { myProjectManager } from "./projectManager"
 export{deleteTodo}
@@ -10,7 +11,8 @@ export{doneTodo}
 function createTodo(title, dueDate, priority,index){
     const newTodo = new Todo(title,dueDate,priority)
     let array = myProjectManager.projectArray[index].todos
-    array.push(newTodo) 
+    array.push(newTodo)
+    setProjects() 
     return newTodo
 }
 function doneTodo(todo,status){

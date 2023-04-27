@@ -1,14 +1,12 @@
 export {mainPage}
 import { myProjectManager } from "./projectManager"
 import { createProject, renameProject } from "./projects"
-import { setProjects } from "./localStorage"
+import { removeProjectStorage, repopulateTheArray, setProjects } from "./localStorage"
 export{removeAllChildNodes}
 export{createProjectDomButton}
 export {displayAllProjects}
 import { removeProject } from "./projects"
 import { selectTodo } from "./todosDom"
-export{removeProjectDom}
-export{createProjectDiv}
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -88,7 +86,7 @@ function displayAllProjects()
         {
                 const projectDiv = document.createElement("div");
                 projectDiv.classList.add("project")
-                projectDiv.textContent = myProjectManager.projectArray[i].title 
+                projectDiv.textContent = myProjectManager.projectArray[i].title
                 projectDiv.dataset.id = i
                 projects.appendChild(projectDiv)
                 const removeButton = document.createElement("button")
@@ -110,16 +108,24 @@ function displayAllProjects()
                         let index = e.target.dataset.id;
                         removeProjectDom(index)
                         selectTodo()
+                        removeProjectStorage()
+                        repopulateTheArray(myProjectManager.projectArray)
                 })    
         }
         const editButton = document.querySelectorAll(".editButton")
+       
         for(let i = 0;i<editButton.length;i++)
         {
+                const ul1 = document.querySelector("#ul1")
                 editButton[i].addEventListener("click",function renameTheDom(e){
+                        if(ul1.childNodes.length<2)
+                        {
                         let index = e.target.dataset.id;
                         editProjectDom(index)
                         selectTodo()
-                })    
+                        }
+                }
+                )    
         }
 }
 displayAllProjects()
@@ -132,6 +138,7 @@ function removeProjectDom(projectIndex)
                 projects.removeChild(projects.lastChild)
         }
         displayAllProjects()
+        
 }
 removeProjectDom()
 function editProjectDom(projectIndex)
@@ -140,26 +147,26 @@ function editProjectDom(projectIndex)
         const ul1 = document.querySelector("#ul1")
         const inputTitle = document.createElement("input")
         inputTitle.setAttribute("id","titleInput")
-        console.log(thisProject.title)
         inputTitle.setAttribute("placeholder","title")
         inputTitle.value = thisProject.title
-
         ul1.appendChild(inputTitle)
         const submitButton = document.createElement("button")
         submitButton.setAttribute("id","createButton")
-        submitButton.textContent = "renameProject";
+        submitButton.textContent = "rename Project";
         ul1.appendChild(submitButton)
         submitButton.addEventListener("click",function editProjectDomListener(){
-                
                 renameProject(myProjectManager.projectArray[projectIndex],inputTitle.value)
+                while(ul1.childNodes.length>1)
+                {
+                        ul1.removeChild(ul1.lastChild)
+                }
                 const projects = document.querySelector("#projects")
                 while(projects.childNodes.length>1)
                 {
                         projects.removeChild(projects.lastChild)
                 }
+        
                 displayAllProjects()
-                inputTitle.remove()
-                submitButton.remove()
         })
 }
 function createProjectDiv()

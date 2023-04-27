@@ -47,13 +47,6 @@ class Project {
   set index(index) {
     this._index = index;
   }
-  get title() {
-    return this._title;
-  }
-  set title(title) {
-    this._title = title;
-  }
-
   addTodo(todo) {
     this.todos.push(todo);
 

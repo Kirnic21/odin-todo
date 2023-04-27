@@ -1,21 +1,39 @@
-export {setProjects}
+
+import { createProjectDomButton, displayAllProjects } from "./dom";
+import { Project } from "./model"
 import { myProjectManager } from "./projectManager"
-export {getProjects}
-export {forEachKey}
-function setProjects()
+import { createProject } from "./projects";
+function setProjects(project,index)
 {
-   const projectsJson = JSON.stringify(myProjectManager.projectArray)
+   const stringified = JSON.stringify(project)
+   localStorage.setItem("project"+index,stringified)
    
-   window.localStorage.setItem("projects",projectsJson)
 }
+
 function getProjects()
 {
-   const retrievedData  = window.localStorage.getItem("projects")
-   const projectArray = JSON.parse(retrievedData)
-   myProjectManager.projectArray = projectArray
+   for (let i = 0 ; i<localStorage.length;i++)
+   {
+   const projectGet = localStorage.getItem("project"+i)
+   const parsedObject = JSON.parse(projectGet)
+   myProjectManager.projectArray.push(parsedObject)
+   }
+   displayAllProjects()
+   }
+function removeProjectStorage()
+{
+   localStorage.clear()
+   
 }
-function forEachKey() {
-   for (let i = 0; i < localStorage.length; i++) {
-      console.log(localStorage.getItem(localStorage.key(i)));
-    }
- }
+function repopulateTheArray(array)
+{
+   for(let i = 0;i<array.length;i++)
+   {
+   const stringified = JSON.stringify(array[i])
+   localStorage.setItem("project"+i,stringified)
+   }
+}
+export {setProjects}
+export{getProjects}
+export {removeProjectStorage}
+export{repopulateTheArray}

@@ -1,4 +1,4 @@
-export {selectTodo}
+
 import { myProjectManager } from "./projectManager"
 import { filterProjects } from "./projects"
 import { createTodo } from "./todos"
@@ -353,3 +353,4 @@ function selectTodo()
 }
  )}}
  selectTodo()
+ export {selectTodo}
