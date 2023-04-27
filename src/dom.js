@@ -165,7 +165,8 @@ function editProjectDom(projectIndex)
                 {
                         projects.removeChild(projects.lastChild)
                 }
-        
+                removeProjectStorage()
+                repopulateTheArray(myProjectManager.projectArray)
                 displayAllProjects()
         })
 }

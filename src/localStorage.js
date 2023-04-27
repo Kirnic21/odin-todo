@@ -33,6 +33,7 @@ function repopulateTheArray(array)
    localStorage.setItem("project"+i,stringified)
    }
 }
+
 export {setProjects}
 export{getProjects}
 export {removeProjectStorage}
