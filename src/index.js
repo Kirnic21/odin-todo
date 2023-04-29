@@ -8,4 +8,6 @@ import { format } from 'date-fns/esm';
 import { setProjects } from './localStorage';
 import{getProjects} from './localStorage';
 import { createProjectDomButton } from './dom';
+import { selectTodo } from './todosDom';
 getProjects()
+

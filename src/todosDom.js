@@ -13,6 +13,7 @@ import { changeDate } from "./todos"
 import { format } from "date-fns/esm"
 import {parseISO} from "date-fns"
 import { doneTodo } from "./todos"
+import { setProjects, updateThing } from "./localStorage"
 mainPage()
 
 function selectTodo()
@@ -22,6 +23,7 @@ function selectTodo()
  {
         
  project[i].addEventListener("click",function filterAll(e){
+        
         const ul1 = document.querySelector("#ul1")
         const projectIndex = e.target.dataset.id;
         const project = filterProjects(myProjectManager.projectArray[projectIndex])
@@ -87,7 +89,6 @@ function selectTodo()
                 todoDiv.appendChild(endGroup)
                 //due date
                 const todoDueDate = document.createElement("div")
-
                 const date = format(new Date(todo.dueDate),'MM/dd/yyyy')
                 
                 endGroup.textContent = date
@@ -103,6 +104,7 @@ function selectTodo()
                 removeTodoButton.setAttribute("id","removeTodo")
                 endGroup.appendChild(removeTodoButton)
                 //change color with priority
+               
                 if(todo.priority === "HIGH")
                 {
                         todoDiv.classList.add("high")
@@ -120,6 +122,7 @@ function selectTodo()
                 {
                     deleteTodo(projectIndex,todo)
                     todoDiv.remove()
+                    setProjects(myProjectManager.projectArray[projectIndex],projectIndex)
                 })
                 const done = document.createElement("button")
                 done.textContent = myProjectManager.projectArray[projectIndex].todos[index].status
@@ -145,7 +148,7 @@ function selectTodo()
                                         const todoDiv = createTodoDiv(todo,i,projectIndex)
                                         todos.appendChild(todoDiv)
                                     }
-                                }
+                                }    
 
                 )
                 removeTodoButton.textContent = "remove Todo"
@@ -167,9 +170,10 @@ function selectTodo()
                             //date
                             const dueDate = document.createElement("li")
                             const dueDateInput = document.createElement("input")
+                             
                             dueDateInput.setAttribute("type","date")
                             dueDateInput.setAttribute("id","dueDateInput")
-
+                            dueDateInput.value = todo.dueDate
                             dueDate.appendChild(dueDateInput)
                             ulToDo.appendChild(dueDate)
                             //priority
@@ -240,10 +244,11 @@ function selectTodo()
                                     {
                                             ul1.removeChild(ul1.lastChild)
                                     }
+                                    setProjects(myProjectManager.projectArray[projectIndex],projectIndex)
                             })
                         }
-                    
                 })
+                setProjects(myProjectManager.projectArray[e.target.dataset.id],e.target.dataset.id)
                 return todoDiv
             }
         

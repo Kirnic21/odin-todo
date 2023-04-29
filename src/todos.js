@@ -12,7 +12,6 @@ function createTodo(title, dueDate, priority,index){
     const newTodo = new Todo(title,dueDate,priority)
     let array = myProjectManager.projectArray[index].todos
     array.push(newTodo)
-    setProjects() 
     return newTodo
 }
 function doneTodo(todo,status){

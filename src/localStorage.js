@@ -3,6 +3,7 @@ import { createProjectDomButton, displayAllProjects } from "./dom";
 import { Project } from "./model"
 import { myProjectManager } from "./projectManager"
 import { createProject } from "./projects";
+import { selectTodo } from "./todosDom";
 function setProjects(project,index)
 {
    const stringified = JSON.stringify(project)
@@ -19,6 +20,7 @@ function getProjects()
    myProjectManager.projectArray.push(parsedObject)
    }
    displayAllProjects()
+   selectTodo()
    }
 function removeProjectStorage()
 {
@@ -33,8 +35,13 @@ function repopulateTheArray(array)
    localStorage.setItem("project"+i,stringified)
    }
 }
-
+function updateThing(array)
+{
+   removeProjectStorage(array)
+   repopulateTheArray()
+}
 export {setProjects}
 export{getProjects}
 export {removeProjectStorage}
 export{repopulateTheArray}
+export {updateThing}
