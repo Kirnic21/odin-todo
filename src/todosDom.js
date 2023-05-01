@@ -14,7 +14,7 @@ import { format } from "date-fns/esm"
 import {parseISO} from "date-fns"
 import { doneTodo } from "./todos"
 import { setProjects, } from "./localStorage"
-mainPage()
+
 
 function selectTodo()
 {      

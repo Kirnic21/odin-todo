@@ -1,6 +1,6 @@
 import {Project} from "/src/model.js"
 import { myProjectManager } from "./projectManager"
-import { getProjects, removeProjectStorage, repopulateTheArray, setProjects } from "./localStorage"
+import { repopulateTheArray, setProjects } from "./localStorage"
 
 function createProject(name)
 {

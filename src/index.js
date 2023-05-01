@@ -9,5 +9,5 @@ import { setProjects } from './localStorage';
 import{getProjects} from './localStorage';
 import { createProjectDomButton } from './dom';
 import { selectTodo } from './todosDom';
+import { createProject } from './projects';
 getProjects()
-

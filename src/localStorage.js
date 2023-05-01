@@ -1,8 +1,6 @@
 
-import { createProjectDomButton, displayAllProjects } from "./dom";
-import { Project } from "./model"
+import { displayAllProjects } from "./dom";
 import { myProjectManager } from "./projectManager"
-import { createProject } from "./projects";
 import { selectTodo } from "./todosDom";
 function setProjects(project,index)
 {
