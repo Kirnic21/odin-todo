@@ -13,7 +13,7 @@ import { changeDate } from "./todos"
 import { format } from "date-fns/esm"
 import {parseISO} from "date-fns"
 import { doneTodo } from "./todos"
-import { setProjects, updateThing } from "./localStorage"
+import { setProjects, } from "./localStorage"
 mainPage()
 
 function selectTodo()
@@ -99,6 +99,8 @@ function selectTodo()
                 endGroup.appendChild(todoPriority)
                 //todo div index
                 todoDiv.dataset.id = index
+                //holding both edit and remove
+                
                 //remove
                 const removeTodoButton = document.createElement("button")
                 removeTodoButton.setAttribute("id","removeTodo")
@@ -125,6 +127,7 @@ function selectTodo()
                     setProjects(myProjectManager.projectArray[projectIndex],projectIndex)
                 })
                 const done = document.createElement("button")
+                done.setAttribute("id","doneButton")
                 done.textContent = myProjectManager.projectArray[projectIndex].todos[index].status
                 
                 todoDiv.appendChild(done)
@@ -154,8 +157,11 @@ function selectTodo()
                 removeTodoButton.textContent = "remove Todo"
                 const editButton = document.createElement("button")
                 editButton.textContent = "edit todo"
+                editButton.setAttribute("id","editTodo")
                 endGroup.appendChild(editButton)
                 editButton.addEventListener("click",function editTodoListener(){
+                        
+                  
                             if(createTodoButton.classList.contains("clicked") === false){
                             const todoInArray = myProjectManager.projectArray[projectIndex].todos[index]
                             //rename
@@ -222,7 +228,11 @@ function selectTodo()
                             submitButton.textContent = "edit todo"
                             ulToDo.appendChild(submitButton)
                             submitButton.addEventListener("click",function changeTodos()
-                            {       
+                            {
+                                const isObjectEmpty = (objectName) => {
+                                        return Object.keys(objectName).length === 0
+                                      }
+                                      if(textTitleInput.value !== "" && (dueDateInput.value !== "" || isObjectEmpty(dueDateInput.value) === false)){  
                                 const priorityValue=document.querySelector('input[name="priority"]:checked').value;
                                     //removealltodos
                                     renameTodo(todoInArray,textTitleInput.value)
@@ -245,7 +255,7 @@ function selectTodo()
                                             ul1.removeChild(ul1.lastChild)
                                     }
                                     setProjects(myProjectManager.projectArray[projectIndex],projectIndex)
-                            })
+                            }})
                         }
                 })
                 setProjects(myProjectManager.projectArray[e.target.dataset.id],e.target.dataset.id)

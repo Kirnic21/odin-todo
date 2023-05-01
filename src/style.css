@@ -4,6 +4,12 @@
     font-weight: 600;
     font-style: normal;
   }
+  @font-face {
+    font-family: 'boutina';
+    src: url(./Boutina\ Caltond\ Regular.otf);
+    font-weight: 600;
+    font-style:normal;
+  }
 *,
 *::before,
 *::after {
@@ -11,20 +17,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root{
+  --sidebarWidth:10%;
+}
 html,body{
   height:100%
 
 }
 
 #header{
-    font-family: 'font';
+    font-family: 'boutina';
     font-size: 3em;
     display:flex;
     background-color:#628395;
     justify-content: center;
 }
 #sidebar {
-  width: 10%;
+  width: var(--sidebarWidth);
   display:flex;
   background: royalblue;
   flex-shrink: 0;
@@ -39,7 +48,7 @@ html,body{
   font-size: 1em;
   display:flex;
   justify-content: center;
-
+  width: 100%;
   padding: 30px;
 }
 .button:hover{
@@ -48,6 +57,8 @@ html,body{
 .project{
   background-color:blue;
   border-radius: 10px;
+  border-style: solid;
+  border-color: black;
   margin: 20px;
   padding: 32px;
   display: flex;
@@ -70,6 +81,8 @@ html,body{
   padding: 16px;
   margin: 16px;
   width: 300px;
+  border-style: solid;
+  border-color: black;
 }
 .high{
   background-color: red;
@@ -111,9 +124,9 @@ justify-content: center;
 .todo{
   display:flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   height:5%;
-  width: 75%;
+  width: 95%;
   gap:50px;
 
 }
@@ -127,12 +140,18 @@ justify-content: center;
   display:flex;
   justify-content: center;
   width: 10%;
+  font-family:'font';
+  align-items: center;
+  height: 100%;
+  width: 50%;
 }
 .endGroup{
   display: flex;
   gap:80px;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
+  font-family:'font'
 }
 #textTitleInput{
   display: flex;
@@ -148,4 +167,40 @@ justify-content: center;
 display: flex;
 background-color: red;
 justify-content: center;
+}
+#removeTodo{
+  border-radius: 12px;
+  font-family: 'font';
+  width: 120px;
+  height: 60px;
+}
+#editTodo{
+  font-family: 'font';
+  border-radius: 12px;
+  width: 120px;
+  height: 60px;
+}
+#doneButton{
+  font-family: 'font';
+  border-radius: 12px;
+  width: 85px;
+  height: 30px;
+}
+.removeButton{
+  width: 50px;
+  height: 50px;
+  background-color: red;
+}
+.editButton{
+  width: 50px;
+  height: 50px;
+  background-color: yellowgreen;
+}
+.both{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ul1{
+  width: 100%;
 }

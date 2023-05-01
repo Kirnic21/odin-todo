@@ -18,7 +18,7 @@ const content = document.querySelector("#content")
 //header
 const header =  document.createElement("div")
 header.setAttribute("id","header");
-header.textContent = "To Do List(\"just do it\"-Shia Lebaulf)"
+header.textContent = "To Do List"
 content.appendChild(header)
 //container
 const container = document.createElement("div");
@@ -89,16 +89,19 @@ function displayAllProjects()
                 projectDiv.textContent = myProjectManager.projectArray[i].title
                 projectDiv.dataset.id = i
                 projects.appendChild(projectDiv)
+                const both = document.createElement("div")
+                both.classList.add("both")
+                projects.appendChild(both)
                 const removeButton = document.createElement("button")
                 removeButton.classList.add("removeButton")
                 removeButton.dataset.id = i 
-                projects.appendChild(removeButton)
+                both.appendChild(removeButton)
                 removeButton.textContent = "remove"
                 const editButton = document.createElement("button")
                 editButton.classList.add("editButton")
                 editButton.textContent = "edit"
                 editButton.dataset.id = i 
-                projects.appendChild(editButton)
+                both.appendChild(editButton)
                 
         }
         const removeButton = document.querySelectorAll(".removeButton")
