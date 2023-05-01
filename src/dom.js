@@ -49,7 +49,7 @@ projectsHeader.setAttribute("id","projectsHeader")
 projectsHeader.textContent = "Projects: "
 projects.appendChild(projectsHeader)
 }
-mainPage()
+
 //Create a Project
 function createProjectDomButton(){
 //find create button page
@@ -76,7 +76,7 @@ createProjectButton.addEventListener("click",function createProjectButton(e)
         }
 })
 }
-createProjectDomButton()
+
 
 
 function displayAllProjects()
@@ -131,7 +131,6 @@ function displayAllProjects()
                 )    
         }
 }
-displayAllProjects()
 function removeProjectDom(projectIndex)
 {
         removeProject(myProjectManager.projectArray[projectIndex],myProjectManager.projectArray)
@@ -143,7 +142,6 @@ function removeProjectDom(projectIndex)
         displayAllProjects()
         
 }
-removeProjectDom()
 function editProjectDom(projectIndex)
 {
         const thisProject = myProjectManager.projectArray[projectIndex]
@@ -197,4 +195,3 @@ selectTodo()
 }
 }
 //createTodoDiv
-selectTodo()

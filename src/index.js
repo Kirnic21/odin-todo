@@ -10,4 +10,9 @@ import{getProjects} from './localStorage';
 import { createProjectDomButton } from './dom';
 import { selectTodo } from './todosDom';
 import { createProject } from './projects';
+import { displayAllProjects } from './dom';
+mainPage()
+createProjectDomButton()
 getProjects()
+displayAllProjects()
+selectTodo()
